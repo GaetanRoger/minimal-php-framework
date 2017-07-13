@@ -89,6 +89,21 @@ class ModelTest extends DatabaseTestBase
     /**
      * @expectedException \Exception
      */
+    public function testUpdateNotFound()
+    {
+        $dumb = new Dumb();
+        
+        $reflectionClass = new \ReflectionClass($dumb);
+        $idProp = $reflectionClass->getProperty('id');
+        $idProp->setAccessible(true);
+        $idProp->setValue($dumb, 999999);
+        
+        $dumb->update();
+    }
+    
+    /**
+     * @expectedException \Exception
+     */
     public function testUpdateWithNullId()
     {
         $dumb = new Dumb();
@@ -107,6 +122,21 @@ class ModelTest extends DatabaseTestBase
         $this->assertNull($dumb->getId());
         $this->assertCount(199, DumbManager::findAll());
         DumbManager::find(1);
+    }
+    
+    /**
+     * @expectedException \Exception
+     */
+    public function testDeleteNotFound()
+    {
+        $dumb = new Dumb();
+        
+        $reflectionClass = new \ReflectionClass($dumb);
+        $idProp = $reflectionClass->getProperty('id');
+        $idProp->setAccessible(true);
+        $idProp->setValue($dumb, 999999);
+        
+        $dumb->delete();
     }
     
     /**

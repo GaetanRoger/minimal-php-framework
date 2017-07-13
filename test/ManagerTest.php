@@ -29,6 +29,20 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals("dumb", $dumbManagerTableName);
     }
     
+    public function testGetModelName()
+    {
+        $myNewManager = $this->getMockForAbstractClass(AbstractManager::class, [], "MyNewManager");
+        $oneAgainManager = $this->getMockForAbstractClass(AbstractManager::class, [], "OneAgainManager");
+        
+        $myNewManagerModelName = $myNewManager::getModelName();
+        $oneAgainManagerModelName = $oneAgainManager::getModelName();
+        $dumbManagerModelName = DumbManager::getModelName();
+        
+        $this->assertEquals("MyNew", $myNewManagerModelName);
+        $this->assertEquals("OneAgain", $oneAgainManagerModelName);
+        $this->assertEquals("Dumb", $dumbManagerModelName);
+    }
+    
     public function testFind()
     {
         /**
@@ -78,5 +92,11 @@ class ManagerTest extends DatabaseTestBase
         $dumbs = DumbManager::findWhere(['count' => 999999]);
         
         $this->assertCount(0, $dumbs);
+        
+        
+        $dumbs = DumbManager::findWhere(['count' => 18, 'timestamp' => 1494407078]);
+        
+        $this->assertCount(1, $dumbs);
+        $this->assertEquals('Berny', $dumbs[0]->getName());
     }
 }
