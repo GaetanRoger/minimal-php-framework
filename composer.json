@@ -10,15 +10,19 @@
             "email": "gaetanroger.fr@gmail.com"
         }
     ],
-    "autoload":          {
-        "psr-4": {
-            "GrBaseFramework\\": "src/"
-        }
-    },
     "require":           {
         "slim/slim": "^3.8.1"
     },
     "require-dev":       {
         "phpunit/phpunit": "6.2.3"
+    },
+    "autoload":          {
+        "psr-4": {
+            "GrBaseFramework\\": "src/",
+            "GrBaseFrameworkTest\\": "test/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
