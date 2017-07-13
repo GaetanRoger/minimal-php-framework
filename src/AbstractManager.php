@@ -22,6 +22,7 @@ abstract class AbstractManager
     /**
      * @param int $id
      * @return AbstractModel
+     * @throws \InvalidArgumentException If nothing found.
      */
     public static function find(int $id): AbstractModel
     {
