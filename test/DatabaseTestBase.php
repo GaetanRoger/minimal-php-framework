@@ -3,6 +3,7 @@
 
 namespace GrBaseFrameworkTest;
 
+use GrBaseFramework\Manager;
 use GrBaseFramework\Model;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
@@ -31,6 +32,7 @@ abstract class DatabaseTestBase extends TestCase
         $connection = $this->createDefaultDBConnection($pdo, $name);
         
         Model::$database = $connection->getConnection();
+        Manager::$database = $connection->getConnection();
         
         return $connection;
     }
