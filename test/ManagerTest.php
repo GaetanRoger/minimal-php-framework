@@ -58,4 +58,27 @@ class ManagerTest extends DatabaseTestBase
         
         $this->assertCount(200, $dumbs);
     }
+    
+    public function testFindWhere()
+    {
+        /**
+         * @var Dumb[] $dumbs
+         */
+        $dumbs = DumbManager::findWhere(['id' => 1]);
+        
+        $this->assertCount(1, $dumbs);
+        $this->assertEquals('Aksel', $dumbs[0]->getName());
+        
+        
+        $dumbs = DumbManager::findWhere(['count' => 830]);
+        
+        $this->assertCount(2, $dumbs);
+        $this->assertEquals('Annabella', $dumbs[0]->getName());
+        $this->assertEquals('Neda', $dumbs[1]->getName());
+        
+        
+        $dumbs = DumbManager::findWhere(['count' => 999999]);
+        
+        $this->assertCount(0, $dumbs);
+    }
 }

@@ -22,13 +22,11 @@ abstract class AbstractManager
     /**
      * @param int $id
      * @return AbstractModel
+     * @throws \InvalidArgumentException If nothing found.
      */
     public static function find(int $id): AbstractModel
     {
-        $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName() . ' WHERE id=:id');
-        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        $results = $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
+        $results = static::findWhere(['id' => $id]);
         
         if (empty($results))
             throw new \InvalidArgumentException("Model not found with id $id.");
@@ -41,9 +39,43 @@ abstract class AbstractManager
      */
     public static function findAll(): array
     {
-        $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName());
+        return static::findWhere([]);
+    }
+    
+    /**
+     * @param array $conditions
+     * @return AbstractModel[]
+     */
+    public static function findWhere(array $conditions): array
+    {
+        $conditionsCount = count($conditions);
+    
+        if ($conditionsCount === 0) {
+            return
+                static::$database->query('SELECT * FROM ' . static::getTableName())
+                ->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
+        }
+        
+        
+        $where = ' WHERE';
+        $columns = array_keys($conditions);
+        $values = array_values($conditions);
+        
+        for ($i = 0; $i < $conditionsCount; ++$i) {
+            $where .= ' ' . $columns[$i] . ' = :' . $columns[$i];
+            
+            if ($i < $conditionsCount - 1)
+                $where .= ' AND';
+        }
+        
+        $statement = static::$database->prepare('SELECT * FROM ' . static::getTableName() . $where);
+    
+        for ($i = 0; $i < $conditionsCount; ++$i) {
+            $statement->bindValue(':' . $columns[$i], $values[$i]);
+        }
+        
         $statement->execute();
-        return $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
+        return $statement->fetchAll(\PDO::FETCH_CLASS, static::getModelName(false));
     }
     
     /**
