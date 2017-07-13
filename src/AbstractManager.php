@@ -47,6 +47,34 @@ abstract class AbstractManager
     }
     
     /**
+     * @param array $conditions
+     * @return AbstractModel[]
+     */
+    public static function findWhere(array $conditions): array
+    {
+        $where = ' WHERE';
+        $columns = array_keys($conditions);
+        $values = array_values($conditions);
+        $conditionsCount = count($conditions);
+        
+        for ($i = 0; $i < $conditionsCount; ++$i) {
+            $where .= ' ' . $columns[$i] . ' = :' . $columns[$i];
+            
+            if ($i < $conditionsCount - 1)
+                $where .= ' AND';
+        }
+        
+        $statement = static::$database->prepare('SELECT * FROM ' . static::getTableName() . $where);
+    
+        for ($i = 0; $i < $conditionsCount; ++$i) {
+            $statement->bindValue(':' . $columns[$i], $values[$i]);
+        }
+        
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_CLASS, static::getModelName(false));
+    }
+    
+    /**
      * Return manager table name.
      *
      * For this to work, the following rules **must** be followed :
