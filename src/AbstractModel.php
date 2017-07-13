@@ -42,7 +42,6 @@ abstract class AbstractModel
      * For this to work, the following rules **must** be followed :
      * * A model class name **must** use CamelCase;
      * * A model class name **must not** end with `Model`;
-     * * A model class name **must** not contain `Model` anywhere else;
      * * The table name **must** use snake_case;
      * * The model class name **must** be the exact conversion from snake_case to CamelCase of the table name.
      *
