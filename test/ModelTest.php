@@ -11,6 +11,7 @@ namespace GrBaseFrameworkTest;
 use GrBaseFramework\AbstractModel;
 use GrBaseFrameworkTest\Classes\Dumb\Dumb;
 use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
+use PHPUnit\Exception;
 
 class ModelTest extends DatabaseTestBase
 {
@@ -72,5 +73,19 @@ class ModelTest extends DatabaseTestBase
         $this->assertEquals('Philip', $newDumb->getName());
         $this->assertEquals(42, $newDumb->getCount());
         $this->assertEquals(123456789, $newDumb->getTimestamp());
+    }
+    
+    /**
+     * @expectedException Exception
+     */
+    public function testDelete()
+    {
+        $dumb = DumbManager::find(1);
+        
+        $dumb->delete();
+        
+        $this->assertNull($dumb->getId());
+        $this->assertCount(199, DumbManager::findAll());
+        DumbManager::find(1);
     }
 }

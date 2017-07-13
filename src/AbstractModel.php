@@ -129,4 +129,19 @@ abstract class AbstractModel
         return $this;
         
     }
+    
+    public function delete(): AbstractModel
+    {
+        $statement = self::$database->prepare('DELETE FROM ' . $this->getTableName() . ' WHERE id = :id');
+        $statement->bindValue(':id', $this->getId(), \PDO::PARAM_INT);
+        $statement->execute();
+    
+        if ($statement->rowCount() !== 1) {
+            throw new \Exception('Row count does not equal one (found ' . $statement->rowCount() . ').');
+        }
+        
+        $this->id = null;
+        
+        return $this;
+    }
 }
