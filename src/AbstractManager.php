@@ -25,10 +25,7 @@ abstract class AbstractManager
      */
     public static function find(int $id): AbstractModel
     {
-        $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName() . ' WHERE id=:id');
-        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        $results = $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
+        $results = static::findWhere(['id' => $id]);
         
         if (empty($results))
             throw new \InvalidArgumentException("Model not found with id $id.");
@@ -41,9 +38,7 @@ abstract class AbstractManager
      */
     public static function findAll(): array
     {
-        $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName());
-        $statement->execute();
-        return $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
+        return static::findWhere([]);
     }
     
     /**
@@ -52,10 +47,18 @@ abstract class AbstractManager
      */
     public static function findWhere(array $conditions): array
     {
+        $conditionsCount = count($conditions);
+    
+        if ($conditionsCount === 0) {
+            return
+                static::$database->query('SELECT * FROM ' . static::getTableName())
+                ->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
+        }
+        
+        
         $where = ' WHERE';
         $columns = array_keys($conditions);
         $values = array_values($conditions);
-        $conditionsCount = count($conditions);
         
         for ($i = 0; $i < $conditionsCount; ++$i) {
             $where .= ' ' . $columns[$i] . ' = :' . $columns[$i];
