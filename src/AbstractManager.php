@@ -83,10 +83,9 @@ abstract class AbstractManager
      *
      * For this to work, the following rules **must** be followed :
      * * A manager class name **must** use CamelCase;
-     * * A manager class name **can** end with `Manager`;
-     * * A model class name **must** not contain `Manager` anywhere else;
-     * * The table name **must** use snake_case;
-     * * The manager class name **must** be the exact conversion from snake_case to CamelCase of the table name.
+     * * A manager class name **must** end with `Manager`;
+     * * A manager class name **must** not contain `Manager` anywhere else;
+     * * The manager class name **must** be identical with the model name plus the word `Manager`.
      *
      * @return string
      */
