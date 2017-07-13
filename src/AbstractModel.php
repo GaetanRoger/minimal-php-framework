@@ -63,32 +63,70 @@ abstract class AbstractModel
     public function insert(): AbstractModel
     {
         $binding = [];
-    
+        
         $reflectionClass = new \ReflectionClass($this);
         $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE);
         foreach ($properties as $property) {
             $property->setAccessible(true);
-            if ($property->getName() === 'id' || $property->getValue($this) === null)
+            if ($property->getName() === 'id' || $property->getValue($this) === null) {
                 continue;
-        
+            }
+            
             $value = $property->getValue($this);
-            if ($value === true)
+            if ($value === true) {
                 $value = 1;
-            else if ($value === false)
+            } else if ($value === false) {
                 $value = 0;
-        
+            }
+            
             $binding[$property->getName()] = $value;
         }
-    
+        
         $tableName = $this->getTableName();
         $columns = implode(', ', array_keys($binding));
         $valuesPlaceholders = ':' . implode(', :', array_keys($binding));
-    
+        
         $statement = self::$database->prepare("INSERT INTO $tableName ($columns) VALUES ($valuesPlaceholders)");
         $statement->execute($binding);
-    
+        
         $this->id = self::$database->lastInsertId();
         
         return $this;
+    }
+    
+    public function update(): AbstractModel
+    {
+        $reflectionClass = new \ReflectionClass($this);
+        $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE);
+        
+        $placeholders = [];
+        $values = [];
+        
+        foreach ($properties as $property) {
+            if ($property->getName() === 'id') {
+                continue;
+            }
+            
+            $property->setAccessible(true);
+            
+            $placeholders[] = $property->getName() . ' = :' . $property->getName();
+            $values[':' . $property->getName()] = $property->getValue($this);
+        }
+        
+        $values = array_merge($values, [':id' => $this->getId()]);
+        
+        $statement = self::$database->prepare(
+            'UPDATE ' . $this->getTableName() .
+            ' SET ' . implode(', ', $placeholders) .
+            ' WHERE id = :id'
+        );
+        $statement->execute($values);
+        
+        if ($statement->rowCount() !== 1) {
+            throw new \Exception('Row count does not equal one (found ' . $statement->rowCount() . ').');
+        }
+        
+        return $this;
+        
     }
 }

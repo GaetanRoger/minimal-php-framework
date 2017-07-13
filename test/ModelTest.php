@@ -10,6 +10,7 @@ namespace GrBaseFrameworkTest;
 
 use GrBaseFramework\AbstractModel;
 use GrBaseFrameworkTest\Classes\Dumb\Dumb;
+use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
 
 class ModelTest extends DatabaseTestBase
 {
@@ -48,5 +49,28 @@ class ModelTest extends DatabaseTestBase
         $this->assertCount(1, $results);
         $this->assertEquals($newDumb->getCount(), $results[0]->getCount());
         $this->assertEquals($newDumb->getTimestamp(), $results[0]->getTimestamp());
+    }
+    
+    public function testUpdate()
+    {
+        /**
+         * @var Dumb $dumb
+         */
+        $dumb = DumbManager::find(1);
+        
+        $dumb->setName('Philip');
+        $dumb->setCount(42);
+        $dumb->setTimestamp(123456789);
+        $dumb->update();
+    
+        
+        /**
+         * @var Dumb $newDumb
+         */
+        $newDumb = DumbManager::find(1);
+        
+        $this->assertEquals('Philip', $newDumb->getName());
+        $this->assertEquals(42, $newDumb->getCount());
+        $this->assertEquals(123456789, $newDumb->getTimestamp());
     }
 }
