@@ -5,8 +5,8 @@ namespace GrBaseFrameworkTest;
 
 use GrBaseFramework\AbstractManager;
 use GrBaseFramework\AbstractModel;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
+use PHPUnit\Framework\TestCase;
 
 
 /**

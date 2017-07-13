@@ -41,37 +41,6 @@ abstract class AbstractModel
     protected $id;
     
     /**
-     * Return the model unique ID.
-     *
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-    
-    /**
-     * Return model table name.
-     *
-     * For this to work, the following rules **must** be followed :
-     * * A model class name **must** use CamelCase;
-     * * A model class name **must not** end with `Model`;
-     * * The table name **must** use snake_case;
-     * * The model class name **must** be the exact conversion from snake_case to CamelCase of the table name.
-     *
-     * @return string
-     */
-    public function getTableName(): string
-    {
-        // Getting the class name
-        $reflectionClass = new \ReflectionClass($this);
-        $className = $reflectionClass->getShortName();
-        
-        // Convert to snake_case
-        return Utils::camelCaseToSnakeCase($className);
-    }
-    
-    /**
      * Insert model into database.
      *
      * The model assumed the ID field is in auto increment, and will not be set in this method. This method
@@ -138,6 +107,37 @@ abstract class AbstractModel
         
         // Returning $this to allow fluent usage
         return $this;
+    }
+    
+    /**
+     * Return the model unique ID.
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * Return model table name.
+     *
+     * For this to work, the following rules **must** be followed :
+     * * A model class name **must** use CamelCase;
+     * * A model class name **must not** end with `Model`;
+     * * The table name **must** use snake_case;
+     * * The model class name **must** be the exact conversion from snake_case to CamelCase of the table name.
+     *
+     * @return string
+     */
+    public function getTableName(): string
+    {
+        // Getting the class name
+        $reflectionClass = new \ReflectionClass($this);
+        $className = $reflectionClass->getShortName();
+        
+        // Convert to snake_case
+        return Utils::camelCaseToSnakeCase($className);
     }
     
     /**
@@ -227,7 +227,7 @@ abstract class AbstractModel
         $statement = self::$database->prepare('DELETE FROM ' . $this->getTableName() . ' WHERE id = :id');
         $statement->bindValue(':id', $this->getId(), \PDO::PARAM_INT);
         $statement->execute();
-    
+        
         // If unexpected rows were deleted (or not), throwing an exception
         if ($statement->rowCount() !== 1) {
             throw new \Exception('Row count does not equal one (found ' . $statement->rowCount() . ').');
@@ -235,7 +235,7 @@ abstract class AbstractModel
         
         // Resetting this ID to null
         $this->id = null;
-    
+        
         // Returning $this to allow fluent usage
         return $this;
     }

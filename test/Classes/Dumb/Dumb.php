@@ -38,22 +38,6 @@ class Dumb extends AbstractModel
     }
     
     /**
-     * @return int
-     */
-    public function getCount(): int
-    {
-        return $this->count;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getTimestamp(): int
-    {
-        return $this->timestamp;
-    }
-    
-    /**
      * @param string $name
      */
     public function setName(string $name)
@@ -62,11 +46,27 @@ class Dumb extends AbstractModel
     }
     
     /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+    
+    /**
      * @param int $count
      */
     public function setCount(int $count)
     {
         $this->count = $count;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
     }
     
     /**

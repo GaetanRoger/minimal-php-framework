@@ -43,16 +43,6 @@ abstract class AbstractManager
     }
     
     /**
-     * Find all models.
-     *
-     * @return AbstractModel[]
-     */
-    public static function findAll(): array
-    {
-        return static::findWhere([]);
-    }
-    
-    /**
      * Find models matching conditions.
      *
      * All the conditions are strict equality checks (`=` sign).
@@ -159,5 +149,15 @@ abstract class AbstractManager
         
         // Else adding namespace
         return $reflectionClass->getNamespaceName() . '\\' . $shortName;
+    }
+    
+    /**
+     * Find all models.
+     *
+     * @return AbstractModel[]
+     */
+    public static function findAll(): array
+    {
+        return static::findWhere([]);
     }
 }

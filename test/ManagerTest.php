@@ -11,8 +11,6 @@ namespace GrBaseFrameworkTest;
 use GrBaseFramework\AbstractManager;
 use GrBaseFrameworkTest\Classes\Dumb\Dumb;
 use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
-use MongoDB\Driver\Manager;
-use PHPUnit\Framework\TestCase;
 
 class ManagerTest extends DatabaseTestBase
 {
@@ -21,11 +19,11 @@ class ManagerTest extends DatabaseTestBase
     {
         $myNewManager = $this->getMockForAbstractClass(AbstractManager::class, [], "MyNewManager");
         $oneAgainManager = $this->getMockForAbstractClass(AbstractManager::class, [], "OneAgainManager");
-    
+        
         $myNewManagerTableName = $myNewManager::getTableName();
         $oneAgainManagerTableName = $oneAgainManager::getTableName();
         $dumbManagerTableName = DumbManager::getTableName();
-    
+        
         $this->assertEquals("my_new", $myNewManagerTableName);
         $this->assertEquals("one_again", $oneAgainManagerTableName);
         $this->assertEquals("dumb", $dumbManagerTableName);
@@ -37,7 +35,7 @@ class ManagerTest extends DatabaseTestBase
          * @var Dumb $dumb
          */
         $dumb = DumbManager::find(1);
-    
+        
         $this->assertNotNull($dumb);
         $this->assertEquals('Aksel', $dumb->getName());
         $this->assertEquals(444, $dumb->getCount());
