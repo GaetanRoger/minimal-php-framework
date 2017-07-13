@@ -9,7 +9,7 @@
 namespace GrBaseFrameworkTest;
 
 use GrBaseFramework\AbstractModel;
-use GrBaseFrameworkTest\Classes\DumbModel;
+use GrBaseFrameworkTest\Classes\Dumb\Dumb;
 
 class ModelTest extends DatabaseTestBase
 {
@@ -17,7 +17,7 @@ class ModelTest extends DatabaseTestBase
     {
         $myNewModel = $this->getMockForAbstractClass(AbstractModel::class, [], "MyNewModel");
         $oneAgain = $this->getMockForAbstractClass(AbstractModel::class, [], "OneAgain");
-        $dumbModel = new DumbModel();
+        $dumbModel = new Dumb();
         
         $myNewModelTableName = $myNewModel->getTableName();
         $oneAgainTableName = $oneAgain->getTableName();
@@ -30,7 +30,7 @@ class ModelTest extends DatabaseTestBase
     
     public function testInsert()
     {
-        $newDumb = new DumbModel();
+        $newDumb = new Dumb();
         $newDumb->setName("Dumb name");
         $newDumb->setCount(42);
         $newDumb->setTimestamp(1499937118);
@@ -42,7 +42,7 @@ class ModelTest extends DatabaseTestBase
         $database = $this->getConnection()->getConnection();
         $results = $database->query(
             'SELECT * FROM ' . $newDumb->getTableName() . ' WHERE name = \'Dumb name\''
-        )->fetchAll(\PDO::FETCH_CLASS, DumbModel::class);
+        )->fetchAll(\PDO::FETCH_CLASS, Dumb::class);
         
         $this->assertNotEmpty($results);
         $this->assertCount(1, $results);

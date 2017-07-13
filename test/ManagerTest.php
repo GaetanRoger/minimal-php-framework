@@ -9,7 +9,7 @@
 namespace GrBaseFrameworkTest;
 
 use GrBaseFramework\AbstractManager;
-use GrBaseFrameworkTest\Classes\DumbManager;
+use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
 use PHPUnit\Framework\TestCase;
 
 class ManagerTest extends TestCase
