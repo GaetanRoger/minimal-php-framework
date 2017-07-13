@@ -19,6 +19,10 @@ abstract class AbstractManager
      */
     public static $database;
     
+    /**
+     * @param int $id
+     * @return AbstractModel
+     */
     public static function find(int $id): AbstractModel
     {
         $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName() . ' WHERE id=:id');
@@ -30,6 +34,16 @@ abstract class AbstractManager
             throw new \InvalidArgumentException("Model not found with id $id.");
         
         return $results[0];
+    }
+    
+    /**
+     * @return AbstractModel[]
+     */
+    public static function findAll(): array
+    {
+        $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName());
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
     }
     
     /**

@@ -51,4 +51,11 @@ class ManagerTest extends DatabaseTestBase
     {
         DumbManager::find(99999);
     }
+    
+    public function testFindAll()
+    {
+        $dumbs = DumbManager::findAll();
+        
+        $this->assertCount(200, $dumbs);
+    }
 }
