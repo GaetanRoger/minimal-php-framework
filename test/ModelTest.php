@@ -13,6 +13,7 @@ use GrBaseFrameworkTest\Classes\Dumb\Dumb;
 use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
 use PHPUnit\Exception;
 
+
 class ModelTest extends DatabaseTestBase
 {
     public function testGetTableName()
@@ -52,6 +53,16 @@ class ModelTest extends DatabaseTestBase
         $this->assertEquals($newDumb->getTimestamp(), $results[0]->getTimestamp());
     }
     
+    /**
+     * @expectedException \Exception
+     */
+    public function testInsertWithNonNullId()
+    {
+        $dumb = DumbManager::find(1);
+        
+        $dumb->insert();
+    }
+    
     public function testUpdate()
     {
         /**
@@ -63,7 +74,7 @@ class ModelTest extends DatabaseTestBase
         $dumb->setCount(42);
         $dumb->setTimestamp(123456789);
         $dumb->update();
-    
+        
         
         /**
          * @var Dumb $newDumb
@@ -73,6 +84,15 @@ class ModelTest extends DatabaseTestBase
         $this->assertEquals('Philip', $newDumb->getName());
         $this->assertEquals(42, $newDumb->getCount());
         $this->assertEquals(123456789, $newDumb->getTimestamp());
+    }
+    
+    /**
+     * @expectedException \Exception
+     */
+    public function testUpdateWithNullId()
+    {
+        $dumb = new Dumb();
+        $dumb->update();
     }
     
     /**
@@ -87,5 +107,14 @@ class ModelTest extends DatabaseTestBase
         $this->assertNull($dumb->getId());
         $this->assertCount(199, DumbManager::findAll());
         DumbManager::find(1);
+    }
+    
+    /**
+     * @expectedException \Exception
+     */
+    public function testDeleteWithNullId()
+    {
+        $dumb = new Dumb();
+        $dumb->delete();
     }
 }
