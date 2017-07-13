@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GrBaseFrameworkTest\Classes;
+namespace GrBaseFrameworkTest\Classes\Dumb;
 
 use GrBaseFramework\AbstractModel;
 
@@ -12,7 +12,7 @@ use GrBaseFramework\AbstractModel;
  * @author Gaetan
  * @date   13/07/2017
  */
-class DumbModel extends AbstractModel
+class Dumb extends AbstractModel
 {
     /**
      * @var string $name

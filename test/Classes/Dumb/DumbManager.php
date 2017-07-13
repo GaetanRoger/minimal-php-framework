@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GrBaseFrameworkTest\Classes;
+namespace GrBaseFrameworkTest\Classes\Dumb;
 
 use GrBaseFramework\AbstractManager;
 
