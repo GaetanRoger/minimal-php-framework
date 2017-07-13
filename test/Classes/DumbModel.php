@@ -3,7 +3,7 @@
 
 namespace GrBaseFrameworkTest\Classes;
 
-use GrBaseFramework\Model;
+use GrBaseFramework\AbstractModel;
 
 
 /**
@@ -12,7 +12,7 @@ use GrBaseFramework\Model;
  * @author Gaetan
  * @date   13/07/2017
  */
-class DumbModel extends Model
+class DumbModel extends AbstractModel
 {
     /**
      * @var string $name

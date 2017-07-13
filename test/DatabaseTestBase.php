@@ -3,8 +3,8 @@
 
 namespace GrBaseFrameworkTest;
 
-use GrBaseFramework\Manager;
-use GrBaseFramework\Model;
+use GrBaseFramework\AbstractManager;
+use GrBaseFramework\AbstractModel;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
 
@@ -31,8 +31,8 @@ abstract class DatabaseTestBase extends TestCase
         $pdo = new \PDO("mysql:dbname=$name;host=$host", $user, $password);
         $connection = $this->createDefaultDBConnection($pdo, $name);
         
-        Model::$database = $connection->getConnection();
-        Manager::$database = $connection->getConnection();
+        AbstractModel::$database = $connection->getConnection();
+        AbstractManager::$database = $connection->getConnection();
         
         return $connection;
     }

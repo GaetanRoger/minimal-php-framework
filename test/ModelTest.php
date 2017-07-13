@@ -8,15 +8,15 @@
 
 namespace GrBaseFrameworkTest;
 
-use GrBaseFramework\Model;
+use GrBaseFramework\AbstractModel;
 use GrBaseFrameworkTest\Classes\DumbModel;
 
 class ModelTest extends DatabaseTestBase
 {
     public function testGetTableName()
     {
-        $myNewModel = $this->getMockForAbstractClass(Model::class, [], "MyNewModel");
-        $oneAgain = $this->getMockForAbstractClass(Model::class, [], "OneAgain");
+        $myNewModel = $this->getMockForAbstractClass(AbstractModel::class, [], "MyNewModel");
+        $oneAgain = $this->getMockForAbstractClass(AbstractModel::class, [], "OneAgain");
         $dumbModel = new DumbModel();
         
         $myNewModelTableName = $myNewModel->getTableName();

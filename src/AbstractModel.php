@@ -10,7 +10,7 @@ namespace GrBaseFramework;
  * @author Gaetan
  * @date   12/07/2017
  */
-abstract class Model
+abstract class AbstractModel
 {
     /**
      * Database instance.
@@ -60,9 +60,9 @@ abstract class Model
     /**
      * Insert model into database.
      *
-     * @return Model
+     * @return AbstractModel
      */
-    public function insert(): Model
+    public function insert(): AbstractModel
     {
         $binding = [];
     
