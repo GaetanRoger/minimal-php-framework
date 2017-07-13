@@ -13,6 +13,13 @@ namespace GrBaseFramework;
 abstract class Model
 {
     /**
+     * Database instance.
+     *
+     * @var \PDO $database
+     */
+    public static $database;
+    
+    /**
      * Model ID.
      *
      * @var int $id
@@ -50,5 +57,40 @@ abstract class Model
         return Utils::camelCaseToSnakeCase($name);
     }
     
+    /**
+     * Insert model into database.
+     *
+     * @return Model
+     */
+    public function insert(): Model
+    {
+        $binding = [];
     
+        $reflectionClass = new \ReflectionClass($this);
+        $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE);
+        foreach ($properties as $property) {
+            $property->setAccessible(true);
+            if ($property->getName() === 'id' || $property->getValue($this) === null)
+                continue;
+        
+            $value = $property->getValue($this);
+            if ($value === true)
+                $value = 1;
+            else if ($value === false)
+                $value = 0;
+        
+            $binding[$property->getName()] = $value;
+        }
+    
+        $tableName = $this->getTableName();
+        $columns = implode(', ', array_keys($binding));
+        $valuesPlaceholders = ':' . implode(', :', array_keys($binding));
+    
+        $statement = self::$database->prepare("INSERT INTO $tableName ($columns) VALUES ($valuesPlaceholders)");
+        $statement->execute($binding);
+    
+        $this->id = self::$database->lastInsertId();
+        
+        return $this;
+    }
 }

@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class UtilsTest extends TestCase
 {
     
-    public function testCamelCadeToSnakeCase()
+    public function testCamelCaseToSnakeCase()
     {
         $camelCase1 = "CamelCase";
         $camelCase2 = "UmlName";
