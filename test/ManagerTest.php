@@ -9,10 +9,12 @@
 namespace GrBaseFrameworkTest;
 
 use GrBaseFramework\AbstractManager;
+use GrBaseFrameworkTest\Classes\Dumb\Dumb;
 use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
+use MongoDB\Driver\Manager;
 use PHPUnit\Framework\TestCase;
 
-class ManagerTest extends TestCase
+class ManagerTest extends DatabaseTestBase
 {
     
     public function testGetTableName()
@@ -27,5 +29,18 @@ class ManagerTest extends TestCase
         $this->assertEquals("my_new", $myNewManagerTableName);
         $this->assertEquals("one_again", $oneAgainManagerTableName);
         $this->assertEquals("dumb", $dumbManagerTableName);
+    }
+    
+    public function testFind()
+    {
+        /**
+         * @var Dumb $dumb
+         */
+        $dumb = DumbManager::find(1);
+    
+        $this->assertNotNull($dumb);
+        $this->assertEquals('Aksel', $dumb->getName());
+        $this->assertEquals(444, $dumb->getCount());
+        $this->assertEquals(1497562479, $dumb->getTimestamp());
     }
 }

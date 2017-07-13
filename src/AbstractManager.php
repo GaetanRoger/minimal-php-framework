@@ -21,10 +21,10 @@ abstract class AbstractManager
     
     public static function find(int $id): AbstractModel
     {
-        $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName() ' WHERE id=:id');
+        $statement = self::$database->prepare('SELECT * FROM ' . self::getTableName() . ' WHERE id=:id');
         $statement->bindValue(':id', $id, \PDO::PARAM_INT);
         $statement->execute();
-        $results = $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName());
+        $results = $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
         
         if (empty($results)) return null;
         return $results[0];
