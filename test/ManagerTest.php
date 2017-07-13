@@ -43,4 +43,12 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals(444, $dumb->getCount());
         $this->assertEquals(1497562479, $dumb->getTimestamp());
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidFind()
+    {
+        DumbManager::find(99999);
+    }
 }
