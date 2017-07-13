@@ -113,8 +113,12 @@ abstract class AbstractModel
             $values[':' . $property->getName()] = $property->getValue($this);
         }
         
+        $values = array_merge($values, [':id' => $this->getId()]);
+        
         $statement = self::$database->prepare(
-            'UPDATE ' . $this->getTableName() . ' SET ' . implode(', ', $placeholders)
+            'UPDATE ' . $this->getTableName() .
+            ' SET ' . implode(', ', $placeholders) .
+            ' WHERE id = :id'
         );
         $statement->execute($values);
         
