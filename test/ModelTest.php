@@ -15,7 +15,7 @@ class ModelTest extends DatabaseTestBase
 {
     public function testGetTableName()
     {
-        $myNewModel = $this->getMockForAbstractClass(AbstractModel::class, [], "MyNewModel");
+        $myNewModel = $this->getMockForAbstractClass(AbstractModel::class, [], "MyNew");
         $oneAgain = $this->getMockForAbstractClass(AbstractModel::class, [], "OneAgain");
         $dumbModel = new Dumb();
         
