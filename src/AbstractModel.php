@@ -10,7 +10,7 @@ namespace GrBaseFramework;
  * @author Gaetan
  * @date   12/07/2017
  */
-abstract class Model
+abstract class AbstractModel
 {
     /**
      * Database instance.
@@ -41,7 +41,7 @@ abstract class Model
      *
      * For this to work, the following rules **must** be followed :
      * * A model class name **must** use CamelCase;
-     * * A model class name **can** end with `Model`;
+     * * A model class name **must not** end with `Model`;
      * * A model class name **must** not contain `Model` anywhere else;
      * * The table name **must** use snake_case;
      * * The model class name **must** be the exact conversion from snake_case to CamelCase of the table name.
@@ -52,17 +52,16 @@ abstract class Model
     {
         $reflectionClass = new \ReflectionClass($this);
         $className = $reflectionClass->getShortName();
-        $name = str_replace('Model', '', $className);
         
-        return Utils::camelCaseToSnakeCase($name);
+        return Utils::camelCaseToSnakeCase($className);
     }
     
     /**
      * Insert model into database.
      *
-     * @return Model
+     * @return AbstractModel
      */
-    public function insert(): Model
+    public function insert(): AbstractModel
     {
         $binding = [];
     
