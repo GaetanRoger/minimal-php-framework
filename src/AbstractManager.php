@@ -26,7 +26,9 @@ abstract class AbstractManager
         $statement->execute();
         $results = $statement->fetchAll(\PDO::FETCH_CLASS, self::getModelName(false));
         
-        if (empty($results)) return null;
+        if (empty($results))
+            throw new \InvalidArgumentException("Model not found with id $id.");
+        
         return $results[0];
     }
     
