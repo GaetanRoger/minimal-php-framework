@@ -1,7 +1,7 @@
 {
     "name":              "gaetanroger/base-php-framework",
     "type":              "library",
-    "description":       "Base PHP framework using Slim PHP",
+    "description":       "Base PHP framework",
     "minimum-stability": "stable",
     "license":           "MIT",
     "version":           "1.0.1",

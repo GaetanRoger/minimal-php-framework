@@ -45,5 +45,6 @@ FooManagerBarManager
 ### v1.0.0
 * Adds AbstractModel
 * Adds AbstractManager
+
 #### v1.0.1
 * Remove unused Slim dependency
