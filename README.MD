@@ -48,3 +48,11 @@ FooManagerBarManager
 
 #### v1.0.1
 * Remove unused Slim dependency
+
+#### v1.0.2
+* Fix README.MD typo
+* Remove Slim in package description
+
+#### v1.0.3
+* Adds changelog into README.MD
+* Fix: forgot to bumb version number
