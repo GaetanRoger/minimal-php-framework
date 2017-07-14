@@ -27,7 +27,7 @@ AweSomeMechanicalPiece
 * A manager class name **must** not contain `Manager` anywhere else;
 * The manager class name **must** be identical with the model name plus the word `Manager`. 
 
-Valid manager names with their model and table name:
+Valid manager names with their model name:
 ```
 FooBarManager --> FooBar
 PersonManager --> Person
@@ -56,3 +56,6 @@ FooManagerBarManager
 #### v1.0.3
 * Adds changelog into README.MD
 * Fix: forgot to bumb version number
+
+#### v1.0.4
+* Fix README.MD typo
