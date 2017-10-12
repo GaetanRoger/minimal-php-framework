@@ -5,6 +5,7 @@ namespace GrBaseFrameworkTest;
 
 use GrBaseFramework\AbstractManager;
 use GrBaseFramework\AbstractModel;
+use PHPUnit\DbUnit\Database\DefaultConnection;
 use PHPUnit\DbUnit\TestCaseTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -19,22 +20,48 @@ abstract class DatabaseTestBase extends TestCase
 {
     use TestCaseTrait;
     
+    /**
+     * @var type \PDO
+     */
+    static private $pdo = null;
+    
+    /**
+     * @var DefaultConnection $connection
+     */
+    private $connection = null;
+    
+    private function _initDatabase()
+    {
+        $this->connection->getConnection()->query('DROP TABLE IF EXISTS dumb');
+        
+        $this->connection->getConnection()->query(
+            "CREATE TABLE dumb (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      name VARCHAR(255),
+                      count INT,
+                      timestamp TIMESTAMP
+                      )"
+        );
+    }
+    
+    
+    
     protected function getConnection()
     {
-        $config = require __DIR__ . '/config.php';
+        if ($this->connection === null) {
+            if (self::$pdo == null) {
+                self::$pdo = new \PDO('sqlite::memory:');
+            }
         
-        $name = $config['database']['name'];
-        $host = $config['database']['host'];
-        $user = $config['database']['user'];
-        $password = $config['database']['password'];
+            $this->connection = $this->createDefaultDBConnection(self::$pdo, "db");
+    
+            AbstractModel::$database = $this->connection->getConnection();
+            AbstractManager::$database = $this->connection->getConnection();
         
-        $pdo = new \PDO("mysql:dbname=$name;host=$host", $user, $password);
-        $connection = $this->createDefaultDBConnection($pdo, $name);
-        
-        AbstractModel::$database = $connection->getConnection();
-        AbstractManager::$database = $connection->getConnection();
-        
-        return $connection;
+            $this->_initDatabase();
+        }
+    
+        return $this->connection;
     }
     
     protected function getDataSet()
