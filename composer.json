@@ -1,5 +1,5 @@
 {
-    "name":              "gaetanroger/base-php-framework",
+    "name":              "gaetanroger/minimal-php-framework",
     "type":              "library",
     "description":       "Base PHP framework",
     "minimum-stability": "stable",
