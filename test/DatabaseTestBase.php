@@ -11,7 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 
 /**
- * Class DatabaseTest
+ * Test class used as parent when tests need to access database.
+ *
+ * This class use the data in file ./data/database.xml to provide a dummy table to the tests.
  *
  * @author Gaetan
  * @date   13/07/2017
@@ -21,7 +23,7 @@ abstract class DatabaseTestBase extends TestCase
     use TestCaseTrait;
     
     /**
-     * @var type \PDO
+     * @var \PDO $pdo
      */
     static private $pdo = null;
     
@@ -45,25 +47,30 @@ abstract class DatabaseTestBase extends TestCase
     }
     
     
-    
+    /**
+     * @inheritdoc
+     */
     protected function getConnection()
     {
         if ($this->connection === null) {
             if (self::$pdo == null) {
                 self::$pdo = new \PDO('sqlite::memory:');
             }
-        
+            
             $this->connection = $this->createDefaultDBConnection(self::$pdo, "db");
-    
+            
             AbstractModel::$database = $this->connection->getConnection();
             AbstractManager::$database = $this->connection->getConnection();
-        
+            
             $this->_initDatabase();
         }
-    
+        
         return $this->connection;
     }
     
+    /**
+     * @inheritdoc
+     */
     protected function getDataSet()
     {
         return $this->createFlatXMLDataSet(__DIR__ . '/data/database.xml');
