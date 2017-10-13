@@ -8,4 +8,4 @@ services:
 install: composer install
 
 after_success:
-  - php vendor/bin/coveralls --coverage_clover "$TRAVIS_BUILD_DIR"/.resource/coverage/clover.xml --verbose
+  - php vendor/bin/coveralls -v
