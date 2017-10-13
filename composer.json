@@ -8,23 +8,23 @@
     "time":              "2017-07-14",
     "authors":           [
         {
-            "name":  "Gaétan Roger",
-            "email": "gaetanroger.fr@gmail.com",
+            "name":     "Gaétan Roger",
+            "email":    "gaetanroger.fr@gmail.com",
             "homepage": "https://gaetanroger.fr"
         }
     ],
     "require-dev":       {
-        "phpunit/phpunit": "^6.2.3",
-        "phpunit/dbunit": "^3.0",
+        "phpunit/phpunit":             "^6.2.3",
+        "phpunit/dbunit":              "^3.0",
         "php-coveralls/php-coveralls": "^1.0"
     },
     "autoload":          {
         "psr-4": {
-            "GrBaseFramework\\": "src/",
+            "GrBaseFramework\\":     "src/",
             "GrBaseFrameworkTest\\": "test/"
         }
     },
-    "scripts": {
+    "scripts":           {
         "test": "phpunit"
     }
 }
