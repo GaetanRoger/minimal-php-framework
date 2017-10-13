@@ -2,7 +2,14 @@
 [![Build Status](https://travis-ci.org/GaetanRoger/minimal-php-framework.svg?branch=master)](https://travis-ci.org/GaetanRoger/minimal-php-framework)
 [![Coverage Status](https://coveralls.io/repos/github/GaetanRoger/minimal-php-framework/badge.svg?branch=master)](https://coveralls.io/github/GaetanRoger/minimal-php-framework?branch=master)
 
-This framework is meant to be used for Model & Manager based application.
+This minimal framework is meant to be used for Model & Manager based application.
+
+## Install
+This project is available as a [Composer dependency](https://packagist.org/packages/gaetanroger/minimal-php-framework).
+Please use the following command:
+```
+composer require gaetanroger/minimal-php-framework
+```
 
 ## Conventions to follow
 ##### Model
