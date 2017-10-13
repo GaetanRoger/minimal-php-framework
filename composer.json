@@ -28,8 +28,8 @@
     },
     "autoload":          {
         "psr-4": {
-            "GrBaseFramework\\":     "src/",
-            "GrBaseFrameworkTest\\": "test/"
+            "Gaetanroger\\MinimalPhpFramework\\":     "src/",
+            "Gaetanroger\\MinimalPhpFrameworkTest\\": "test/"
         }
     },
     "scripts":           {

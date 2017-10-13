@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GrBaseFramework;
+namespace Gaetanroger\MinimalPhpFramework;
 
 
 /**
