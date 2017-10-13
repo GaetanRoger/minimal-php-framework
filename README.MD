@@ -44,25 +44,4 @@ FooManagerBarManager
 ```
 
 ## Changelog
-### v1.0.0
-* Adds AbstractModel
-* Adds AbstractManager
-
-#### v1.0.1
-* Remove unused Slim dependency
-
-#### v1.0.2
-* Fix README.MD typo
-* Remove Slim in package description
-
-#### v1.0.3
-* Adds changelog into README.MD
-* Fix: forgot to bumb version number
-
-#### v1.0.4
-* Fix README.MD typo
-
-#### v1.0.5
-* Renamed project to Minimal PHP Framework
-* Integrates the whole project into Travis CI and Coveralls to get nice badges
-* Rewrites unit tests to use sqlite memory database instead of MySQL
+Please take a look at [CHANGELOG.MD](CHANGELOG.md)
