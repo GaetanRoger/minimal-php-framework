@@ -1,4 +1,6 @@
-# Base PHP framwork
+# Minimal PHP framwork
+[![Build Status](https://travis-ci.org/GaetanRoger/minimal-php-framework.svg?branch=master)](https://travis-ci.org/GaetanRoger/minimal-php-framework)
+[![Coverage Status](https://coveralls.io/repos/github/GaetanRoger/minimal-php-framework/badge.svg?branch=master)](https://coveralls.io/github/GaetanRoger/minimal-php-framework?branch=master)
 
 This framework is meant to be used for Model & Manager based application.
 
@@ -59,3 +61,8 @@ FooManagerBarManager
 
 #### v1.0.4
 * Fix README.MD typo
+
+#### v1.0.5
+* Renamed project to Minimal PHP Framework
+* Integrates the whole project into Travis CI and Coveralls to get nice badges
+* Rewrites unit tests to use sqlite memory database instead of MySQL

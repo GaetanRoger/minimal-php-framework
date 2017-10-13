@@ -4,8 +4,8 @@
     "description":       "Base PHP framework",
     "minimum-stability": "stable",
     "license":           "MIT",
-    "version":           "1.0.4",
-    "time":              "2017-07-14",
+    "version":           "1.0.5",
+    "time":              "2017-10-13",
     "authors":           [
         {
             "name":     "Gaétan Roger",
@@ -13,6 +13,14 @@
             "homepage": "https://gaetanroger.fr"
         }
     ],
+    "require":           {
+        "php": ">=7.0"
+    },
+    "config":            {
+        "platform": {
+            "php": "7.0"
+        }
+    },
     "require-dev":       {
         "phpunit/phpunit":             "^6.2.3",
         "phpunit/dbunit":              "^3.0",
