@@ -11,7 +11,7 @@ This minimal framework is meant to be used for a Model & Manager PHP based appli
 - Manager: singleton class managing all instances of one model
 
 If your application is about cars, you could have the following classes and methods:
-```yaml
+```
 - Car
   - drive()
   - stop()
@@ -41,7 +41,6 @@ composer require gaetanroger/minimal-php-framework
 ## How to use
 At the beginning of your application, please set the PDO connection in the model and manager like this:
 ```php
-<?php
 AbstractModel::$database = $yourPDOConnection;
 AbstractManager::$database = $yourPDOConnection;
 ```
