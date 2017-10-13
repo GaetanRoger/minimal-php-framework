@@ -1,4 +1,6 @@
 # Minimal PHP framwork
+[![Build Status](https://travis-ci.org/GaetanRoger/minimal-php-framework.svg?branch=master)](https://travis-ci.org/GaetanRoger/minimal-php-framework)
+[![Coverage Status](https://coveralls.io/repos/github/GaetanRoger/minimal-php-framework/badge.svg?branch=master)](https://coveralls.io/github/GaetanRoger/minimal-php-framework?branch=master)
 
 This framework is meant to be used for Model & Manager based application.
 
