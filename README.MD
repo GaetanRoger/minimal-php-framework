@@ -113,3 +113,6 @@ false, will return full class name (package/model). This method can be overridde
 
 ## Changelog
 Please take a look at [CHANGELOG.MD](CHANGELOG.md)
+
+## Please criticize
+Please feel free to contact me here or by [email](mailto:gaetanroger.fr@gmail.com) if something bothers you or does not work as expected.
