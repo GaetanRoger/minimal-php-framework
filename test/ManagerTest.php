@@ -45,6 +45,8 @@ class ManagerTest extends DatabaseTestBase
     
     public function testFind()
     {
+        $l = $this->getConnection()->getConnection()->query("SELECT * FROM DUMB");
+      
         /**
          * @var Dumb $dumb
          */

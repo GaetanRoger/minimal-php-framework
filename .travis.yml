@@ -1,0 +1,11 @@
+language: php
+php:
+  - '7.0'
+  - '7.1'
+services:
+  - sqlite3
+
+install: composer install
+
+after_success:
+  - php vendor/bin/coveralls -v

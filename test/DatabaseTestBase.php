@@ -5,12 +5,15 @@ namespace GrBaseFrameworkTest;
 
 use GrBaseFramework\AbstractManager;
 use GrBaseFramework\AbstractModel;
+use PHPUnit\DbUnit\Database\DefaultConnection;
 use PHPUnit\DbUnit\TestCaseTrait;
 use PHPUnit\Framework\TestCase;
 
 
 /**
- * Class DatabaseTest
+ * Test class used as parent when tests need to access database.
+ *
+ * This class use the data in file ./data/database.xml to provide a dummy table to the tests.
  *
  * @author Gaetan
  * @date   13/07/2017
@@ -19,24 +22,55 @@ abstract class DatabaseTestBase extends TestCase
 {
     use TestCaseTrait;
     
-    protected function getConnection()
+    /**
+     * @var \PDO $pdo
+     */
+    static private $pdo = null;
+    
+    /**
+     * @var DefaultConnection $connection
+     */
+    private $connection = null;
+    
+    private function _initDatabase()
     {
-        $config = require __DIR__ . '/config.php';
+        $this->connection->getConnection()->query('DROP TABLE IF EXISTS dumb');
         
-        $name = $config['database']['name'];
-        $host = $config['database']['host'];
-        $user = $config['database']['user'];
-        $password = $config['database']['password'];
-        
-        $pdo = new \PDO("mysql:dbname=$name;host=$host", $user, $password);
-        $connection = $this->createDefaultDBConnection($pdo, $name);
-        
-        AbstractModel::$database = $connection->getConnection();
-        AbstractManager::$database = $connection->getConnection();
-        
-        return $connection;
+        $this->connection->getConnection()->query(
+            "CREATE TABLE dumb (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      name VARCHAR(255),
+                      count INT,
+                      timestamp TIMESTAMP
+                      )"
+        );
     }
     
+    
+    /**
+     * @inheritdoc
+     */
+    protected function getConnection()
+    {
+        if ($this->connection === null) {
+            if (self::$pdo == null) {
+                self::$pdo = new \PDO('sqlite::memory:');
+            }
+            
+            $this->connection = $this->createDefaultDBConnection(self::$pdo, "db");
+            
+            AbstractModel::$database = $this->connection->getConnection();
+            AbstractManager::$database = $this->connection->getConnection();
+            
+            $this->_initDatabase();
+        }
+        
+        return $this->connection;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     protected function getDataSet()
     {
         return $this->createFlatXMLDataSet(__DIR__ . '/data/database.xml');

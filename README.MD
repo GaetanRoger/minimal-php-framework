@@ -1,4 +1,4 @@
-# Base PHP framwork
+# Minimal PHP framwork
 
 This framework is meant to be used for Model & Manager based application.
 
@@ -59,3 +59,8 @@ FooManagerBarManager
 
 #### v1.0.4
 * Fix README.MD typo
+
+#### v1.0.5
+* Renamed project to Minimal PHP Framework
+* Integrates the whole project into Travis CI and Coveralls to get nice badges
+* Rewrites unit tests to use sqlite memory database instead of MySQL
