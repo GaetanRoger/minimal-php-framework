@@ -47,8 +47,8 @@ AbstractManager::$database = $yourPDOConnection;
 This will allow the model to update and insert itself into the database, and the manager to find models (from an ID for 
 example). Plus, all your models and manager will be able to easily access database.
 
-Then simply make all your models and managers inherit from `GrBaseFramework\AbstractModel` and 
-`GrBaseFramework\AbstractManager.` Be careful to follow naming conventions specified down below, as names are by default
+Then simply make all your models and managers inherit from `Gaetanroger\MinimalPhpFramework\AbstractModel` and 
+`Gaetanroger\MinimalPhpFramework\AbstractManager.` Be careful to follow naming conventions specified down below, as names are by default
 dynamically used by the framework.
 
 ## Conventions to follow
@@ -112,7 +112,7 @@ snake_case. This method can be overridden if a custom table name must be used.
 false, will return full class name (package/model). This method can be overridden if a custom manager name must be used.
 
 ## Changelog
-Please take a look at [CHANGELOG.MD](CHANGELOG.md)
+Please take a look at [CHANGELOG.MD](CHANGELOG.MD)
 
 ## Please criticize
 Please feel free to contact me here or by [email](mailto:gaetanroger.fr@gmail.com) if something bothers you or does not work as expected.
