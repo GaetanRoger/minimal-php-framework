@@ -33,24 +33,68 @@ class ModelTest extends DatabaseTestBase
     
     public function testInsert()
     {
-        $newDumb = new Dumb();
-        $newDumb->setName("Dumb name");
-        $newDumb->setCount(42);
-        $newDumb->setTimestamp(1499937118);
+        // Creating true
+        $newDumbTrue = new Dumb();
+        $newDumbTrue->setName("Dumb name true");
+        $newDumbTrue->setCount(42);
+        $newDumbTrue->setTimestamp(1499937118);
+        $newDumbTrue->setBool(true);
         
-        $newDumb->insert();
+        // Creating false
+        $newDumbFalse = new Dumb();
+        $newDumbFalse->setName("Dumb name false");
+        $newDumbFalse->setCount(21);
+        $newDumbFalse->setTimestamp(1499937119);
+        $newDumbFalse->setBool(false);
         
-        $this->assertNotNull($newDumb->getId());
+        // Inserting both
+        $newDumbTrue->insert();
+        $newDumbFalse->insert();
         
+        // Checking ID was set for both
+        $this->assertNotNull($newDumbTrue->getId());
+        $this->assertNotNull($newDumbFalse->getId());
+        $this->assertNotEquals($newDumbTrue->getId(), $newDumbFalse->getId());
+        
+        /**
+         * @var \PDO $database
+         */
         $database = $this->getConnection()->getConnection();
-        $results = $database->query(
-            'SELECT * FROM ' . $newDumb->getTableName() . ' WHERE name = \'Dumb name\''
+        
+        
+        // Testing true
+        
+        /**
+         * @var Dumb[] $resultsTrue
+         */
+        $resultsTrue = $database->query(
+            'SELECT * FROM ' . $newDumbTrue->getTableName() . ' WHERE name = \'Dumb name true\''
         )->fetchAll(\PDO::FETCH_CLASS, Dumb::class);
         
-        $this->assertNotEmpty($results);
-        $this->assertCount(1, $results);
-        $this->assertEquals($newDumb->getCount(), $results[0]->getCount());
-        $this->assertEquals($newDumb->getTimestamp(), $results[0]->getTimestamp());
+        $this->assertNotEmpty($resultsTrue);
+        $this->assertCount(1, $resultsTrue);
+        $this->assertEquals($newDumbTrue->getCount(), $resultsTrue[0]->getCount());
+        $this->assertEquals($newDumbTrue->getTimestamp(), $resultsTrue[0]->getTimestamp());
+        $this->assertEquals($newDumbTrue->isBool(), $resultsTrue[0]->isBool());
+        
+        
+        // Testing false
+        
+        
+        /**
+         * @var Dumb[] $resultsFalse
+         */
+        $resultsFalse = $database->query(
+            'SELECT * FROM ' . $newDumbTrue->getTableName() . ' WHERE name = \'Dumb name false\''
+        )->fetchAll(\PDO::FETCH_CLASS, Dumb::class);
+        
+        $this->assertNotEmpty($resultsFalse);
+        $this->assertCount(1, $resultsFalse);
+        $this->assertEquals($newDumbFalse->getCount(), $resultsFalse[0]->getCount());
+        $this->assertEquals($newDumbFalse->getTimestamp(), $resultsFalse[0]->getTimestamp());
+        $this->assertEquals($newDumbFalse->isBool(), $resultsFalse[0]->isBool());
+        
+        
     }
     
     /**
@@ -73,6 +117,7 @@ class ModelTest extends DatabaseTestBase
         $dumb->setName('Philip');
         $dumb->setCount(42);
         $dumb->setTimestamp(123456789);
+        $dumb->setBool(false);
         $dumb->update();
         
         
@@ -84,6 +129,7 @@ class ModelTest extends DatabaseTestBase
         $this->assertEquals('Philip', $newDumb->getName());
         $this->assertEquals(42, $newDumb->getCount());
         $this->assertEquals(123456789, $newDumb->getTimestamp());
+        $this->assertEquals(false, $newDumb->isBool());
     }
     
     /**

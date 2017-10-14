@@ -62,7 +62,8 @@ abstract class DatabaseTestBase extends TestCase
                       id INTEGER PRIMARY KEY AUTOINCREMENT,
                       name VARCHAR(255),
                       count INT,
-                      timestamp TIMESTAMP
+                      timestamp TIMESTAMP,
+                      bool TINYINT
                       )"
         );
     }

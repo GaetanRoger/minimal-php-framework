@@ -45,7 +45,7 @@ class ManagerTest extends DatabaseTestBase
     
     public function testFind()
     {
-        $l = $this->getConnection()->getConnection()->query("SELECT * FROM DUMB");
+        $this->getConnection()->getConnection()->query("SELECT * FROM DUMB");
         
         /**
          * @var Dumb $dumb
@@ -56,6 +56,7 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals('Aksel', $dumb->getName());
         $this->assertEquals(444, $dumb->getCount());
         $this->assertEquals(1497562479, $dumb->getTimestamp());
+        $this->assertEquals(true, $dumb->isBool());
     }
     
     /**

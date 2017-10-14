@@ -30,6 +30,11 @@ class Dumb extends AbstractModel
     private $timestamp;
     
     /**
+     * @var bool $bool
+     */
+    private $bool;
+    
+    /**
      * @return string
      */
     public function getName(): string
@@ -75,6 +80,22 @@ class Dumb extends AbstractModel
     public function setTimestamp(int $timestamp)
     {
         $this->timestamp = $timestamp;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isBool(): bool
+    {
+        return $this->bool;
+    }
+    
+    /**
+     * @param bool $bool
+     */
+    public function setBool(bool $bool)
+    {
+        $this->bool = $bool;
     }
     
     
