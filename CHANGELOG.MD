@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-#### [1.0.6] - UNRELEASED
+#### [1.0.6] - 2017-10-14
 - CHANGED - Moved changelog from [README.MD](README.MD) to [CHANGELOG.MD](CHANGELOG.MD)
 - CHANGED - Renamed namespaces to match new name
 - CHANGED - Wrote better documentation in [README.MD](README.MD) to help new user
