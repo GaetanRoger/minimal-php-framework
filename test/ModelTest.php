@@ -6,11 +6,11 @@
  * @date   13/07/2017 08:55
  */
 
-namespace GrBaseFrameworkTest;
+namespace Gaetanroger\MinimalPhpFrameworkTest;
 
-use GrBaseFramework\AbstractModel;
-use GrBaseFrameworkTest\Classes\Dumb\Dumb;
-use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
+use Gaetanroger\MinimalPhpFramework\AbstractModel;
+use Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb\Dumb;
+use Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb\DumbManager;
 use PHPUnit\Exception;
 
 

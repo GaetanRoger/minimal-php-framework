@@ -1,19 +1,14 @@
 <?php
 
 
-namespace GrBaseFramework;
+namespace Gaetanroger\MinimalPhpFramework;
 
 
 /**
  * Model class.
  *
  * A model is a representation of a database entity. Each model is identified by its unsigned integer ID.
- * * All model attributes **must** correspond to their database fields, even if it makes use of snake_case in
- * attributes name.
- * * Getters and setters **should** use CamelCase, event it their properties use snake_case.
- * * Model name **must** be the exact conversion from snake_case to CamelCase of the table name.
- *
- * See *README.MD* for further rules and info.
+ * Please see *README.MD* for naming conventions to follow.
  *
  * @author Gaetan
  * @date   12/07/2017
