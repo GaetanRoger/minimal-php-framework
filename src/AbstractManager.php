@@ -1,13 +1,14 @@
 <?php
 
 
-namespace GrBaseFramework;
+namespace Gaetanroger\MinimalPhpFramework;
 
 
 /**
- * Class Manager
+ * Manager class.
  *
- * A manager stores all static methods not specific to one model.
+ * A manager defines all static methods not specific to one model.
+ * Please see *README.MD* for naming conventions to follow.
  *
  * @author Gaetan
  * @date   13/07/2017

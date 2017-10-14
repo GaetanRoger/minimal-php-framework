@@ -6,11 +6,11 @@
  * @date   13/07/2017 14:23
  */
 
-namespace GrBaseFrameworkTest;
+namespace Gaetanroger\MinimalPhpFrameworkTest;
 
-use GrBaseFramework\AbstractManager;
-use GrBaseFrameworkTest\Classes\Dumb\Dumb;
-use GrBaseFrameworkTest\Classes\Dumb\DumbManager;
+use Gaetanroger\MinimalPhpFramework\AbstractManager;
+use Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb\Dumb;
+use Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb\DumbManager;
 
 class ManagerTest extends DatabaseTestBase
 {
@@ -45,8 +45,8 @@ class ManagerTest extends DatabaseTestBase
     
     public function testFind()
     {
-        $l = $this->getConnection()->getConnection()->query("SELECT * FROM DUMB");
-      
+        $this->getConnection()->getConnection()->query("SELECT * FROM DUMB");
+        
         /**
          * @var Dumb $dumb
          */
@@ -56,6 +56,7 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals('Aksel', $dumb->getName());
         $this->assertEquals(444, $dumb->getCount());
         $this->assertEquals(1497562479, $dumb->getTimestamp());
+        $this->assertEquals(true, $dumb->isBool());
     }
     
     /**

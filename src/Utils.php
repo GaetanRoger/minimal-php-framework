@@ -1,11 +1,13 @@
 <?php
 
 
-namespace GrBaseFramework;
+namespace Gaetanroger\MinimalPhpFramework;
 
 
 /**
- * Class Utils
+ * Utils class.
+ *
+ * This static class defines random functions needed by the framework.
  *
  * @author Gaetan
  * @date   12/07/2017

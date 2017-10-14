@@ -1,9 +1,9 @@
 <?php
 
 
-namespace GrBaseFrameworkTest\Classes\Dumb;
+namespace Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb;
 
-use GrBaseFramework\AbstractModel;
+use Gaetanroger\MinimalPhpFramework\AbstractModel;
 
 
 /**
@@ -28,6 +28,11 @@ class Dumb extends AbstractModel
      * @var int $timestamp
      */
     private $timestamp;
+    
+    /**
+     * @var bool $bool
+     */
+    private $bool;
     
     /**
      * @return string
@@ -75,6 +80,22 @@ class Dumb extends AbstractModel
     public function setTimestamp(int $timestamp)
     {
         $this->timestamp = $timestamp;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isBool(): bool
+    {
+        return $this->bool;
+    }
+    
+    /**
+     * @param bool $bool
+     */
+    public function setBool(bool $bool)
+    {
+        $this->bool = $bool;
     }
     
     

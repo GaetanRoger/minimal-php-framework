@@ -4,8 +4,8 @@
     "description":       "Base PHP framework",
     "minimum-stability": "stable",
     "license":           "MIT",
-    "version":           "1.0.5",
-    "time":              "2017-10-13",
+    "version":           "1.0.6",
+    "time":              "2017-10-14",
     "authors":           [
         {
             "name":     "Gaétan Roger",
@@ -28,8 +28,8 @@
     },
     "autoload":          {
         "psr-4": {
-            "GrBaseFramework\\":     "src/",
-            "GrBaseFrameworkTest\\": "test/"
+            "Gaetanroger\\MinimalPhpFramework\\":     "src/",
+            "Gaetanroger\\MinimalPhpFrameworkTest\\": "test/"
         }
     },
     "scripts":           {

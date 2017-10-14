@@ -1,9 +1,9 @@
 <?php
 
 
-namespace GrBaseFrameworkTest\Classes\Dumb;
+namespace Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb;
 
-use GrBaseFramework\AbstractManager;
+use Gaetanroger\MinimalPhpFramework\AbstractManager;
 
 
 /**

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace GrBaseFrameworkTest;
+namespace Gaetanroger\MinimalPhpFrameworkTest;
 
-use GrBaseFramework\AbstractManager;
-use GrBaseFramework\AbstractModel;
+use Gaetanroger\MinimalPhpFramework\AbstractManager;
+use Gaetanroger\MinimalPhpFramework\AbstractModel;
 use PHPUnit\DbUnit\Database\DefaultConnection;
 use PHPUnit\DbUnit\TestCaseTrait;
 use PHPUnit\Framework\TestCase;
@@ -32,21 +32,6 @@ abstract class DatabaseTestBase extends TestCase
      */
     private $connection = null;
     
-    private function _initDatabase()
-    {
-        $this->connection->getConnection()->query('DROP TABLE IF EXISTS dumb');
-        
-        $this->connection->getConnection()->query(
-            "CREATE TABLE dumb (
-                      id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      name VARCHAR(255),
-                      count INT,
-                      timestamp TIMESTAMP
-                      )"
-        );
-    }
-    
-    
     /**
      * @inheritdoc
      */
@@ -66,6 +51,21 @@ abstract class DatabaseTestBase extends TestCase
         }
         
         return $this->connection;
+    }
+    
+    private function _initDatabase()
+    {
+        $this->connection->getConnection()->query('DROP TABLE IF EXISTS dumb');
+        
+        $this->connection->getConnection()->query(
+            "CREATE TABLE dumb (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      name VARCHAR(255),
+                      count INT,
+                      timestamp TIMESTAMP,
+                      bool TINYINT
+                      )"
+        );
     }
     
     /**

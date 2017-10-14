@@ -6,9 +6,9 @@
  * @date   13/07/2017 08:20
  */
 
-namespace GrBaseFrameworkTest;
+namespace Gaetanroger\MinimalPhpFrameworkTest;
 
-use GrBaseFramework\Utils;
+use Gaetanroger\MinimalPhpFramework\Utils;
 use PHPUnit\Framework\TestCase;
 
 class UtilsTest extends TestCase
