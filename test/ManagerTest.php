@@ -29,7 +29,7 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals("dumb", $dumbManagerTableName);
     }
     
-    public function testGetModelName()
+    public function testGetModelNameShort()
     {
         $myNewManager = $this->getMockForAbstractClass(AbstractManager::class, [], "MyNewManager");
         $oneAgainManager = $this->getMockForAbstractClass(AbstractManager::class, [], "OneAgainManager");
@@ -41,6 +41,13 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals("MyNew", $myNewManagerModelName);
         $this->assertEquals("OneAgain", $oneAgainManagerModelName);
         $this->assertEquals("Dumb", $dumbManagerModelName);
+    }
+    
+    public function testGetModelNameLong()
+    {
+        $modelName = DumbManager::getModelName(false);
+        
+        $this->assertEquals('Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb\Dumb', $modelName);
     }
     
     public function testFind()
