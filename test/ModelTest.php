@@ -98,7 +98,7 @@ class ModelTest extends DatabaseTestBase
     }
     
     /**
-     * @expectedException \Exception
+     * @expectedException \BadMethodCallException
      */
     public function testInsertWithNonNullId()
     {
@@ -133,7 +133,7 @@ class ModelTest extends DatabaseTestBase
     }
     
     /**
-     * @expectedException \Exception
+     * @expectedException \BadMethodCallException
      */
     public function testUpdateNotFound()
     {
