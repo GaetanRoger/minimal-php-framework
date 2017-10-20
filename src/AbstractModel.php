@@ -195,7 +195,7 @@ abstract class AbstractModel
         
         // If unexpected rows were modified (or not), throwing an exception
         if ($statement->rowCount() !== 1) {
-            throw new \Exception('Row count does not equal one (found ' . $statement->rowCount() . ').');
+            throw new \UnexpectedValueException('Row count does not equal one (found ' . $statement->rowCount() . ').');
         }
         
         // Returning $this to allow fluent usage
@@ -226,7 +226,7 @@ abstract class AbstractModel
         
         // If unexpected rows were deleted (or not), throwing an exception
         if ($statement->rowCount() !== 1) {
-            throw new \Exception('Row count does not equal one (found ' . $statement->rowCount() . ').');
+            throw new \UnexpectedValueException('Row count does not equal one (found ' . $statement->rowCount() . ').');
         }
         
         // Resetting this ID to null

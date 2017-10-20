@@ -133,7 +133,7 @@ class ModelTest extends DatabaseTestBase
     }
     
     /**
-     * @expectedException \BadMethodCallException
+     * @expectedException \UnexpectedValueException
      */
     public function testUpdateNotFound()
     {
@@ -171,7 +171,7 @@ class ModelTest extends DatabaseTestBase
     }
     
     /**
-     * @expectedException \Exception
+     * @expectedException \UnexpectedValueException
      */
     public function testDeleteNotFound()
     {
