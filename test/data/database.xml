@@ -194,8 +194,8 @@
     <dumb name="Carolus" count="658" timestamp="1495283066" bool="true"/>
     <dumb name="Anthe" count="754" timestamp="1499224851" bool="true"/>
     <dumb name="Evvy" count="598" timestamp="1499146094" bool="true"/>
-    <dumb name="Nevile" count="18" timestamp="1493203637" bool="true"/>
-    <dumb name="Symon" count="230" timestamp="1495570386" bool="true"/>
+    <dumb name="Nevile" count="18" timestamp="1493203637" bool="false"/>
+    <dumb name="Symon" count="230" timestamp="1495570386" bool="false"/>
     <dumb name="Howard" count="731" timestamp="1490611356" bool="true"/>
     <dumb name="Robinson" count="674" timestamp="1498017455" bool="true"/>
     <dumb name="Dun" count="758" timestamp="1492030205" bool="true"/>
