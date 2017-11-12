@@ -110,6 +110,8 @@ checks (`=` sign). If a different condition check is necessary, feel free to imp
 snake_case. This method can be overridden if a custom table name must be used.
 - **getModelName(short)**: Returns the model name by trimming the word `Manager` from the class name. If `short` is 
 false, will return full class name (package/model). This method can be overridden if a custom manager name must be used.
+- **count(column, distinct)**: Counts rows in table using SQL `COUNT`. Default parameters will simply count all rows but
+you can specify what column you want to count and if you want it to only count distinct values.
 
 ## Changelog
 Please take a look at [CHANGELOG.MD](CHANGELOG.MD)

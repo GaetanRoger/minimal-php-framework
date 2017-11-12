@@ -29,7 +29,7 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals("dumb", $dumbManagerTableName);
     }
     
-    public function testGetModelName()
+    public function testGetModelNameShort()
     {
         $myNewManager = $this->getMockForAbstractClass(AbstractManager::class, [], "MyNewManager");
         $oneAgainManager = $this->getMockForAbstractClass(AbstractManager::class, [], "OneAgainManager");
@@ -41,6 +41,13 @@ class ManagerTest extends DatabaseTestBase
         $this->assertEquals("MyNew", $myNewManagerModelName);
         $this->assertEquals("OneAgain", $oneAgainManagerModelName);
         $this->assertEquals("Dumb", $dumbManagerModelName);
+    }
+    
+    public function testGetModelNameLong()
+    {
+        $modelName = DumbManager::getModelName(false);
+        
+        $this->assertEquals('Gaetanroger\MinimalPhpFrameworkTest\Classes\Dumb\Dumb', $modelName);
     }
     
     public function testFind()
@@ -101,5 +108,29 @@ class ManagerTest extends DatabaseTestBase
         
         $this->assertCount(1, $dumbs);
         $this->assertEquals('Berny', $dumbs[0]->getName());
+    }
+    
+    public function testCountAll()
+    {
+        $c = DumbManager::count();
+        
+        $this->assertEquals(200, $c);
+    }
+    
+    public function testCountColumn()
+    {
+        $cAll = DumbManager::count('bool');
+        $cDistinct = DumbManager::count('bool', true);
+        
+        $this->assertEquals(200, $cAll);
+        $this->assertEquals(2, $cDistinct);
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testColumnAllDistinctError()
+    {
+        DumbManager::count('*', true);
     }
 }

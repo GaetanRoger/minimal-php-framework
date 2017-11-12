@@ -42,13 +42,14 @@ abstract class AbstractModel
      * will actually use lastInsertId to set the model ID field to the corresponding value.
      *
      * @return AbstractModel The model itself, to be used in fluent operations.
-     * @throws \Exception If getId does not return null (meaning the model is already inserted into database).
+     * @throws \BadMethodCallException If getId does not return null (meaning the model is already inserted into
+     *                                 database).
      */
     public function insert(): AbstractModel
     {
         // If the model is already inserted into database, throwing an exception
         if ($this->getId() !== null) {
-            throw new \Exception(
+            throw new \BadMethodCallException(
                 "This model already has an ID (meaning it is already inserted into database). Maybe use update?"
             );
         }
@@ -125,10 +126,10 @@ abstract class AbstractModel
      *
      * @return string
      */
-    public function getTableName(): string
+    public static function getTableName(): string
     {
         // Getting the class name
-        $reflectionClass = new \ReflectionClass($this);
+        $reflectionClass = new \ReflectionClass(static::class);
         $className = $reflectionClass->getShortName();
         
         // Convert to snake_case
@@ -141,13 +142,13 @@ abstract class AbstractModel
      * The method will use the model ID to update all its other fields.
      *
      * @return AbstractModel The model itself, to be used in fluent operations.
-     * @throws \Exception If model ID is null (meaning it is not inserted into database).
+     * @throws \BadMethodCallException If model ID is null (meaning it is not inserted into database).
      */
     public function update(): AbstractModel
     {
         // If the model is not inserted into database, throwing an exception
         if ($this->getId() === null) {
-            throw new \Exception("Model ID is null (meaning it's not inserted into database). Maybe use insert?");
+            throw new \BadMethodCallException("Model ID is null (meaning it's not inserted into database). Maybe use insert?");
         }
         
         
@@ -194,7 +195,7 @@ abstract class AbstractModel
         
         // If unexpected rows were modified (or not), throwing an exception
         if ($statement->rowCount() !== 1) {
-            throw new \Exception('Row count does not equal one (found ' . $statement->rowCount() . ').');
+            throw new \UnexpectedValueException('Row count does not equal one (found ' . $statement->rowCount() . ').');
         }
         
         // Returning $this to allow fluent usage
@@ -209,13 +210,13 @@ abstract class AbstractModel
      *
      * @return AbstractModel The model itself, to be used in fluent operations.
      * @throws \Exception If modified row count does not equal one.
-     * @throws \Exception If ID is null (meaning that the model is not inserted into database).
+     * @throws \BadMethodCallException If ID is null (meaning that the model is not inserted into database).
      */
     public function delete(): AbstractModel
     {
         // If the model is not inserted into database, throwing an exception
         if ($this->getId() === null) {
-            throw new \Exception("Model ID is null (meaning it's not inserted into database).");
+            throw new \BadMethodCallException("Model ID is null (meaning it's not inserted into database).");
         }
         
         // Running query
@@ -225,7 +226,7 @@ abstract class AbstractModel
         
         // If unexpected rows were deleted (or not), throwing an exception
         if ($statement->rowCount() !== 1) {
-            throw new \Exception('Row count does not equal one (found ' . $statement->rowCount() . ').');
+            throw new \UnexpectedValueException('Row count does not equal one (found ' . $statement->rowCount() . ').');
         }
         
         // Resetting this ID to null
