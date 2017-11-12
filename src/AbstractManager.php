@@ -161,4 +161,30 @@ abstract class AbstractManager
     {
         return static::findWhere([]);
     }
+    
+    /**
+     * Count lines in table using SQL `COUNT`.
+     *
+     * Default column parameter `*` is used to count all lines without targeting specific column. It is
+     * the only value which is not a valid column name that will work. Be careful, using `*` and distinct to true
+     * will throw an exception.
+     *
+     * @param string $column   Column to count.
+     * @param bool   $distinct True to count only distinct values when targeting a specific column.
+     * @return int Result of count.
+     * @throws \InvalidArgumentException if `column` is set to `*` and `distinct` is set to true.
+     */
+    public static function count(string $column = '*', bool $distinct = false): int
+    {
+        if ($distinct && $column === '*') {
+            throw new \InvalidArgumentException("Cannot use keyword DISTINCT with COUNT(*).");
+        }
+        
+        $tableName = self::getTableName();
+        $distinctStr = $distinct ? ' DISTINCT ' : '';
+        
+        $statement = static::$database->query("SELECT COUNT($distinctStr $column) FROM $tableName");
+        
+        return $statement->fetch()[0];
+    }
 }
