@@ -109,4 +109,28 @@ class ManagerTest extends DatabaseTestBase
         $this->assertCount(1, $dumbs);
         $this->assertEquals('Berny', $dumbs[0]->getName());
     }
+    
+    public function testCountAll()
+    {
+        $c = DumbManager::count();
+        
+        $this->assertEquals(200, $c);
+    }
+    
+    public function testCountColumn()
+    {
+        $cAll = DumbManager::count('bool');
+        $cDistinct = DumbManager::count('bool', true);
+        
+        $this->assertEquals(200, $cAll);
+        $this->assertEquals(2, $cDistinct);
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testColumnAllDistinctError()
+    {
+        DumbManager::count('*', true);
+    }
 }
